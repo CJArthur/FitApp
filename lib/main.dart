@@ -1,4 +1,5 @@
-import 'package:fitapp/screens/home_screen.dart';
+//import 'package:fitapp/screens/home_screen.dart';
+import 'package:fitapp/screens/main_screen.dart';
 import 'package:fitapp/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class WorkoutApp extends StatelessWidget {
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
       themeMode: ThemeMode.dark,
-      home: const HomeScreen(),
+      home: const MainScreen(),
     );
   }
 }
