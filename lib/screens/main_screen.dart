@@ -1,6 +1,5 @@
 import 'package:fitapp/screens/home_screen.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
