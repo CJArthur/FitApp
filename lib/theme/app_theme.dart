@@ -1,7 +1,17 @@
 import 'package:flutter/cupertino.dart';
 
 abstract final class AppColors {
-  static const accent = Color.fromARGB(235, 215, 255, 55);
+  // цвет меняется автоматически в зависимости от текущей темы
+  static const accent = CupertinoDynamicColor.withBrightness(
+    color: Color.fromARGB(234, 23, 85, 255),
+    darkColor: Color.fromARGB(234, 215, 255, 55),
+  );
+
+  // выбор цвета текста в зависимости от темы
+  static const accentText = CupertinoDynamicColor.withBrightness(
+    color: CupertinoColors.white, // Светлая тема: белый текст
+    darkColor: CupertinoColors.black, // Темная тема: черный текст
+  );
 
   static const background = CupertinoDynamicColor.withBrightness(
     color: Color(0xFFF2F2F7),
@@ -17,15 +27,15 @@ abstract final class AppColors {
 abstract final class AppTheme {
   static const dark = CupertinoThemeData(
     brightness: Brightness.dark,
-    primaryColor: Color.fromARGB(234, 215, 255, 55),            // салатовый
+    primaryColor: Color.fromARGB(234, 215, 255, 55), // Салатовый
     scaffoldBackgroundColor: Color(0xFF0F1217),
     barBackgroundColor: Color(0xFF15181E),
   );
 
   static const light = CupertinoThemeData(
     brightness: Brightness.light,
-    primaryColor: Color.fromARGB(234, 215, 255, 55),            // тёмно-оливковый
-    scaffoldBackgroundColor: Color.fromARGB(255, 55, 122, 255),
-    barBackgroundColor: Color.fromARGB(255, 10, 64, 209),
+    primaryColor: Color.fromARGB(234, 23, 85, 255), // Синий
+    scaffoldBackgroundColor: Color(0xFFFFFFFF),
+    barBackgroundColor: Color.fromARGB(255, 224, 211, 211),
   );
 }
