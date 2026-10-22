@@ -27,6 +27,8 @@ class WorkoutsController extends ChangeNotifier {
     return '$y-$m-$d';
   }
   
+  String get formattedSelectedDate => _format(_selectedDate);
+
   String get displayDate {
     final d = _selectedDate.day.toString().padLeft(2, '0');
     final m = _selectedDate.month.toString().padLeft(2, '0');
