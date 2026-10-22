@@ -13,14 +13,28 @@ abstract final class AppColors {
     darkColor: CupertinoColors.black, // Темная тема: черный текст
   );
 
+  // Стиль карточек в зависимости от темы
+  static const accentCard = CupertinoDynamicColor.withBrightness(
+    color: CupertinoColors.secondarySystemBackground,
+    darkColor: CupertinoColors.darkBackgroundGray,
+  );
+
+  // Задний фон
   static const background = CupertinoDynamicColor.withBrightness(
     color: Color(0xFFF2F2F7),
     darkColor: Color(0xFF0F1217),
   );
 
+  // Тул бар
   static const bar = CupertinoDynamicColor.withBrightness(
     color: Color(0xFFFFFFFF),
     darkColor: Color(0xFF15181E),
+  );
+
+  // Граница между тул баром и осн страницей
+  static const tabBarBorder = CupertinoDynamicColor.withBrightness(
+    color: CupertinoColors.black,
+    darkColor: CupertinoColors.inactiveGray,
   );
 }
 
