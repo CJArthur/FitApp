@@ -1,4 +1,6 @@
 import 'package:fitapp/screens/home_screen.dart';
+import 'package:fitapp/screens/settings_screen.dart';
+import 'package:fitapp/theme/app_theme.dart';
 import 'package:flutter/cupertino.dart';
 
 class MainScreen extends StatefulWidget {
@@ -14,7 +16,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> screens = [
     const HomeScreen(),
     const Center(child: Text('Тренировки')),
-    const Center(child: Text('Настройки')),
+    const SettingsScreen(),
   ];
 
   @override
@@ -27,6 +29,14 @@ class _MainScreenState extends State<MainScreen> {
 
             CupertinoTabBar(
               currentIndex: currentIndex,
+
+              // Граница таб панели
+              border: Border(
+                top: BorderSide(
+                  color: AppColors.tabBarBorder.resolveFrom(context),
+                  width: 1.0
+                )
+              ),
 
               onTap: (index) {
                 setState(() {
