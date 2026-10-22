@@ -1,8 +1,10 @@
 import 'package:fitapp/controllers/workouts_controller.dart';
 import 'package:fitapp/theme/app_theme.dart';
+import 'package:fitapp/widgets/add_workout_sheet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:fitapp/widgets/workouts_list.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -37,14 +39,9 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 16),
             _DateStrip(controller: controller),
             const SizedBox(height: 16),
-            // Сюда позже пойдёт список тренировок (шаг 4)
             Expanded(
-              child: Center(
-                child: controller.isLoading
-                    ? const CupertinoActivityIndicator()
-                    : Text(
-                        'Тренировок на ${controller.displayDate}: ${controller.workouts.length}',
-                      ),
+              child: WorkoutsList(
+                onAddPressed: () => showAddWorkoutSheet(context),
               ),
             ),
           ],
