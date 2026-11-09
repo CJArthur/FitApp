@@ -1,4 +1,6 @@
 import 'package:fitapp/controllers/workouts_controller.dart';
+import 'package:fitapp/controllers/profile_controller.dart';
+import 'package:fitapp/data/dao/profile_dao.dart';
 import 'package:fitapp/data/dao/workouts_dao.dart';
 import 'package:fitapp/screens/main_screen.dart';
 import 'package:fitapp/theme/app_theme.dart';
@@ -31,19 +33,25 @@ class WorkoutApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
+          create: (_) => ProfileController(ProfileDao())..load(),
+        ),
+        ChangeNotifierProvider(
           create: (_) =>
               WorkoutsController(WorkoutsDao())..selectDate(DateTime.now()),
         ),
       ],
-      child: const CupertinoApp(
-        theme: AppTheme.dark,
-        localizationsDelegates: [
-          GlobalCupertinoLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-        ],
-        supportedLocales: [Locale('ru')],
-        home: MainScreen(),
+      // Consumer перестраивает приложение при переключении темы.
+      child: Consumer<ProfileController>(
+        builder: (context, controller, child) => CupertinoApp(
+          theme: controller.isDarkMode ? AppTheme.dark : AppTheme.light,
+          localizationsDelegates: const [
+            GlobalCupertinoLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+          ],
+          supportedLocales: const [Locale('ru')],
+          home: const MainScreen(),
+        ),
       ),
     );
   }
