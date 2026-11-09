@@ -7,9 +7,6 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('Данные аккаунта'),
-      ),
       child: SafeArea(
         child: ListView(
           children: [
@@ -37,7 +34,7 @@ class SettingsScreen extends StatelessWidget {
                 ),
                 CupertinoListTile(
                   leading: Icon(CupertinoIcons.calendar),
-                  title: Text('ФИО'),
+                  title: Text('Дата рождения'),
                   additionalInfo: Text('Не указано'),
                 ),
               ],

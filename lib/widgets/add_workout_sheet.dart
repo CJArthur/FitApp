@@ -5,13 +5,13 @@ import 'package:fitapp/theme/app_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
-// Точка входа: вызывать этой функцией из home_screen.dart
+// Точка входа: вызываем этой функцией
 Future<void> showAddWorkoutSheet(BuildContext context) {
   final controller = context.read<WorkoutsController>();
   return showCupertinoModalPopup(
     context: context,
     builder: (_) => ChangeNotifierProvider.value(
-      // передаём тот же контроллер внутрь модалки — она в отдельном дереве навигации
+      // передаём тот же контроллер внутрь модалки
       value: controller,
       child: const _AddWorkoutSheet(),
     ),
@@ -29,7 +29,7 @@ class _AddWorkoutSheet extends StatelessWidget {
         color: CupertinoColors.systemBackground,
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
-      // Свой маленький Navigator — чтобы переключать "список шаблонов" <-> "форма",
+      // Свой маленький навигатор — чтобы переключать "список шаблонов" <-> "форма",
       // не выходя из модалки
       child: Navigator(
         onGenerateRoute: (_) => CupertinoPageRoute(
@@ -61,7 +61,7 @@ class _TemplatesPage extends StatelessWidget {
               child: ListView.separated(
                 padding: const EdgeInsets.all(16),
                 itemCount: workoutTemplates.length,
-                separatorBuilder: (_, __) => const SizedBox(height: 10),
+                separatorBuilder: (_, _) => const SizedBox(height: 10),
                 itemBuilder: (context, index) {
                   final template = workoutTemplates[index];
                   return _TemplateCard(template: template);
@@ -166,6 +166,7 @@ class _CustomWorkoutFormState extends State<_CustomWorkoutForm> {
     return '$h:$m';
   }
 
+  // Сохранение нашей тренировки
   Future<void> _save() async {
     final title = _titleController.text.trim();
     final duration = int.tryParse(_durationController.text.trim());
@@ -187,7 +188,7 @@ class _CustomWorkoutFormState extends State<_CustomWorkoutForm> {
       );
       return;
     }
-
+    
     final controller = context.read<WorkoutsController>();
     final trainer = _trainerController.text.trim();
 

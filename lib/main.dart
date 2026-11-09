@@ -19,7 +19,7 @@ void main() async {
     sqfliteFfiInit();
     databaseFactory = databaseFactoryFfi;
   }
-
+  print(await getDatabasesPath());
   runApp(const WorkoutApp());
 }
 
@@ -36,7 +36,7 @@ class WorkoutApp extends StatelessWidget {
         ),
       ],
       child: const CupertinoApp(
-        theme: AppTheme.light,
+        theme: AppTheme.dark,
         localizationsDelegates: [
           GlobalCupertinoLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,

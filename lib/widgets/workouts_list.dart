@@ -57,7 +57,7 @@ class WorkoutsList extends StatelessWidget {
     return ListView.separated(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       itemCount: controller.workouts.length,
-      separatorBuilder: (_, __) => const SizedBox(height: 10),
+      separatorBuilder: (_, _) => const SizedBox(height: 10),
       itemBuilder: (context, index) {
         final workout = controller.workouts[index];
         return _WorkoutCard(workout: workout);
@@ -82,7 +82,7 @@ class _WorkoutCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Выбираем цвет по id, чтобы не менялся при скролле
+    // Выбираем цвет по id, чтобы не менялся при скролле и был разным
     final stripeColor = _accentColors[workout.id.hashCode.abs() % _accentColors.length];
 
     return Dismissible(
@@ -145,25 +145,25 @@ class _WorkoutCard extends StatelessWidget {
                   ],
                 ),
               ),
-              // Кружок справа как на референсе
-              // Container(
-              //   width: 32,
-              //   height: 32,
-              //   decoration: BoxDecoration(
-              //     shape: BoxShape.circle,
-              //     color: CupertinoColors.systemGrey.withOpacity(0.15),
-              //   ),
-              //   child: Center(
-              //     child: Container(
-              //       width: 10,
-              //       height: 10,
-              //       decoration: const BoxDecoration(
-              //         shape: BoxShape.circle,
-              //         color: CupertinoColors.systemGrey,
-              //       ),
-              //     ),
-              //   ),
-              // ),
+              // справа как на референсе
+              Container(
+                width: 32,
+                height: 32,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: CupertinoColors.systemGrey.withOpacity(0.15),
+                ),
+                child: Center(
+                  child: Container(
+                    width: 10,
+                    height: 10,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: CupertinoColors.systemGrey,
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
