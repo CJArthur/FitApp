@@ -1,5 +1,6 @@
 import 'package:fitapp/controllers/workouts_controller.dart';
 import 'package:fitapp/controllers/profile_controller.dart';
+import 'package:fitapp/controllers/app_settings_controller.dart';
 import 'package:fitapp/data/dao/profile_dao.dart';
 import 'package:fitapp/data/dao/workouts_dao.dart';
 import 'package:fitapp/screens/main_screen.dart';
@@ -33,6 +34,9 @@ class WorkoutApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
+          create: (_) => AppSettingsController(),
+        ),
+        ChangeNotifierProvider(
           create: (_) => ProfileController(ProfileDao())..load(),
         ),
         ChangeNotifierProvider(
@@ -41,7 +45,7 @@ class WorkoutApp extends StatelessWidget {
         ),
       ],
       // Consumer перестраивает приложение при переключении темы.
-      child: Consumer<ProfileController>(
+      child: Consumer<AppSettingsController>(
         builder: (context, controller, child) => CupertinoApp(
           theme: controller.isDarkMode ? AppTheme.dark : AppTheme.light,
           localizationsDelegates: const [

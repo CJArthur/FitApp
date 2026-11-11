@@ -14,15 +14,6 @@ class ProfileController extends ChangeNotifier {
   String? _loadError;
   String? get loadError => _loadError;
 
-  // Настройки интерфейса пока действуют в пределах запуска приложения.
-  bool _isDarkMode = true;
-  bool get isDarkMode => _isDarkMode;
-
-  void setDarkMode(bool value) {
-    _isDarkMode = value;
-    notifyListeners();
-  }
-
   Future<void> load() async {
     _isLoading = true;
     _loadError = null;
