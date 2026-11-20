@@ -1,3 +1,4 @@
+import 'package:fitapp/l10n/app_localizations.dart';
 import 'package:fitapp/theme/app_theme.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -7,12 +8,13 @@ class AccountSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Padding(
+        Padding(
           padding: EdgeInsets.fromLTRB(0, 28, 0, 12),
-          child: Text('АККАУНТ', style: TextStyle(
+          child: Text(l10n.accountSection, style: TextStyle(
             fontSize: 12, fontWeight: FontWeight.w600, color: CupertinoColors.systemGrey,
           )),
         ),
@@ -24,17 +26,17 @@ class AccountSection extends StatelessWidget {
             color: AppColors.accentCard.resolveFrom(context),
             borderRadius: BorderRadius.circular(16),
           ),
-          children: const [
+          children: [
             CupertinoListTile(
-              title: Text('Сменить пароль', style: TextStyle(fontSize: 14)),
+              title: Text(l10n.changePassword, style: TextStyle(fontSize: 14)),
               trailing: Icon(CupertinoIcons.chevron_right, size: 14, color: CupertinoColors.systemGrey),
             ),
             CupertinoListTile(
-              title: Text('Привязать соцсеть', style: TextStyle(fontSize: 14)),
+              title: Text(l10n.linkSocial, style: TextStyle(fontSize: 14)),
               trailing: Icon(CupertinoIcons.chevron_right, size: 14, color: CupertinoColors.systemGrey),
             ),
             CupertinoListTile(
-              title: Text('Удалить аккаунт', style: TextStyle(fontSize: 14, color: CupertinoColors.systemRed)),
+              title: Text(l10n.deleteAccount, style: TextStyle(fontSize: 14, color: CupertinoColors.systemRed)),
               trailing: Icon(CupertinoIcons.chevron_right, size: 14, color: CupertinoColors.systemGrey),
             ),
           ],
@@ -50,12 +52,12 @@ class AccountSection extends StatelessWidget {
               border: Border.all(color: CupertinoColors.systemRed),
               borderRadius: BorderRadius.circular(14),
             ),
-            child: const Text('Выйти из аккаунта',
+            child: Text(l10n.signOut,
                 style: TextStyle(color: CupertinoColors.systemRed, fontWeight: FontWeight.w600)),
           ),
         ),
         const SizedBox(height: 8),
-        const Text('Действия аккаунта станут доступны после подключения входа.',
+        Text(l10n.accountUnavailable,
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 12, color: CupertinoColors.systemGrey)),
       ],

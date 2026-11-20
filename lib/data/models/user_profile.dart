@@ -24,9 +24,6 @@ class UserProfile {
 
   String get displayName {
     final name = '$firstName $lastName'.trim();
-    if (name.isEmpty) {
-      return 'Имя не указано';
-    }
     return name;
   }
 

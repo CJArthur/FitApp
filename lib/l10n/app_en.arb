@@ -1,0 +1,82 @@
+{
+  "@@locale": "en",
+  "home": "Home",
+  "workouts": "Workouts",
+  "account": "Account",
+  "welcome": "Welcome!",
+  "weeklyStreak": "Weekly streak",
+  "streakDays": "{count, plural, one{{count} day in a row} other{{count} days in a row}}",
+  "@streakDays": {
+    "description": "Количество дней подряд",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "workoutCountLabel": "Workouts",
+  "emptyWorkouts": "No workouts yet. Rest day!",
+  "addWorkout": "Add workout",
+  "close": "Close",
+  "customWorkout": "Custom workout",
+  "checkFields": "Check the fields",
+  "workoutValidation": "Enter a title and a duration greater than zero.",
+  "ok": "OK",
+  "save": "Save",
+  "saved": "Saved",
+  "time": "Time",
+  "workoutTitle": "Title",
+  "workoutExample": "For example, CrossFit",
+  "coachOptional": "Coach (optional)",
+  "coachName": "Coach name",
+  "durationMinutes": "Duration, min",
+  "workoutDetails": "{coach} · {minutes} min",
+  "@workoutDetails": {
+    "description": "Тренер и продолжительность",
+    "placeholders": {
+      "coach": {
+        "type": "String"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "appSection": "APP",
+  "darkTheme": "Dark theme",
+  "units": "Units",
+  "unitSystem": "kg / cm",
+  "interfaceLanguage": "Language",
+  "accountSection": "ACCOUNT",
+  "changePassword": "Change password",
+  "linkSocial": "Link social account",
+  "deleteAccount": "Delete account",
+  "signOut": "Sign out",
+  "accountUnavailable": "Account actions will be available once sign-in is connected.",
+  "personalData": "PERSONAL DETAILS",
+  "firstName": "First name",
+  "lastName": "Last name",
+  "middleName": "Middle name",
+  "birthDate": "Date of birth",
+  "dateHint": "DD.MM.YYYY",
+  "email": "Email",
+  "phone": "Phone",
+  "heightCm": "Height, cm",
+  "weightKg": "Weight, kg",
+  "targetKg": "Goal, kg",
+  "targetWeightHint": "Target weight",
+  "notSpecified": "Not set",
+  "saveError": "Could not save",
+  "saveRetry": "Your entries are still in the form. Please try again.",
+  "positiveMeasurements": "Height, weight and goal must be numbers greater than zero.",
+  "invalidBirthDate": "Check the date of birth. Use DD.MM.YYYY.",
+  "invalidEmail": "Check the email. Example: name@mail.com.",
+  "profileLoadError": "Could not load the profile",
+  "retry": "Retry",
+  "nameNotSpecified": "Name not set",
+  "height": "Height",
+  "weight": "Weight",
+  "goal": "Goal",
+  "cm": "cm",
+  "kg": "kg"
+}

@@ -15,10 +15,8 @@ class AppSettingsController extends ChangeNotifier {
   }
 
   void setLanguage(String value) {
-    // Меняем только выбранный сегмент RU / EN. Перевод пока не подключён.
+    // main.dart читает language и передаёт его в locale приложения.
     _language = value;
     notifyListeners();
   }
-
-  void set
 }

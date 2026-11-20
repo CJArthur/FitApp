@@ -1,3 +1,4 @@
+import 'package:fitapp/l10n/app_localizations.dart';
 import 'package:fitapp/controllers/workouts_controller.dart';
 import 'package:fitapp/data/models/workout.dart';
 import 'package:fitapp/data/models/workout_template.dart';
@@ -45,12 +46,13 @@ class _TemplatesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-        middle: const Text('Добавить тренировку'),
+        middle: Text(l10n.addWorkout),
         trailing: CupertinoButton(
           padding: EdgeInsets.zero,
-          child: const Text('Закрыть'),
+          child: Text(l10n.close),
           onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
         ),
       ),
@@ -78,7 +80,7 @@ class _TemplatesPage extends StatelessWidget {
                     CupertinoPageRoute(builder: (_) => const _CustomWorkoutForm()),
                   );
                 },
-                child: Text('Своя тренировка', style: TextStyle(color: AppColors.accentText.resolveFrom(context))),
+                child: Text(l10n.customWorkout, style: TextStyle(color: AppColors.accentText.resolveFrom(context))),
               ),
             ),
           ],
@@ -95,6 +97,7 @@ class _TemplateCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -112,7 +115,7 @@ class _TemplateCard extends StatelessWidget {
                 Text(template.title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
                 const SizedBox(height: 4),
                 Text(
-                  '${template.coach} · ${template.durationMinutes} мин',
+                  l10n.workoutDetails(template.coach, template.durationMinutes),
                   style: const TextStyle(fontSize: 13, color: CupertinoColors.systemGrey),
                 ),
               ],
@@ -168,6 +171,7 @@ class _CustomWorkoutFormState extends State<_CustomWorkoutForm> {
 
   // Сохранение нашей тренировки
   Future<void> _save() async {
+    final l10n = AppLocalizations.of(context);
     final title = _titleController.text.trim();
     final duration = int.tryParse(_durationController.text.trim());
 
@@ -176,11 +180,11 @@ class _CustomWorkoutFormState extends State<_CustomWorkoutForm> {
       showCupertinoDialog(
         context: context,
         builder: (dialogContext) => CupertinoAlertDialog(
-          title: const Text('Проверь поля'),
-          content: const Text('Название и продолжительность (число > 0) обязательны.'),
+          title: Text(l10n.checkFields),
+          content: Text(l10n.workoutValidation),
           actions: [
             CupertinoDialogAction(
-              child: const Text('Ок'),
+              child: Text(l10n.ok),
               onPressed: () => Navigator.of(dialogContext).pop(),
             ),
           ],
@@ -205,20 +209,21 @@ class _CustomWorkoutFormState extends State<_CustomWorkoutForm> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-        middle: const Text('Своя тренировка'),
+        middle: Text(l10n.customWorkout),
         trailing: CupertinoButton(
           padding: EdgeInsets.zero,
           onPressed: _save,
-          child: const Text('Сохранить'),
+          child: Text(l10n.save),
         ),
       ),
       child: SafeArea(
         child: ListView(
           padding: const EdgeInsets.all(16),
           children: [
-            const Text('Время', style: TextStyle(color: CupertinoColors.systemGrey)),
+            Text(l10n.time, style: TextStyle(color: CupertinoColors.systemGrey)),
             const SizedBox(height: 8),
             SizedBox(
               height: 150,
@@ -230,12 +235,12 @@ class _CustomWorkoutFormState extends State<_CustomWorkoutForm> {
               ),
             ),
             const SizedBox(height: 16),
-            _buildField('Название', _titleController, placeholder: 'Например, Кроссфит'),
+            _buildField(l10n.workoutTitle, _titleController, placeholder: l10n.workoutExample),
             const SizedBox(height: 16),
-            _buildField('Тренер (необязательно)', _trainerController, placeholder: 'Имя тренера'),
+            _buildField(l10n.coachOptional, _trainerController, placeholder: l10n.coachName),
             const SizedBox(height: 16),
             _buildField(
-              'Продолжительность, мин',
+              l10n.durationMinutes,
               _durationController,
               placeholder: '60',
               keyboardType: TextInputType.number,

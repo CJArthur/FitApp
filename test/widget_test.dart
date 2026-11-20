@@ -1,30 +1,67 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
+import 'package:fitapp/controllers/app_settings_controller.dart';
+import 'package:fitapp/data/models/user_profile.dart';
+import 'package:fitapp/l10n/app_localizations.dart';
+import 'package:fitapp/widgets/settings/app_settings_section.dart';
+import 'package:fitapp/widgets/settings/profile_form.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:fitapp/main.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const WorkoutApp());
+  testWidgets('RU / EN changes labels and keeps the text in the form', (tester) async {
+    final settings = AppSettingsController();
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Проверяем настоящий переключатель и форму. База для этого не нужна.
+    await tester.pumpWidget(
+      ChangeNotifierProvider.value(
+        value: settings,
+        child: Consumer<AppSettingsController>(
+          builder: (context, controller, child) => CupertinoApp(
+            locale: Locale(controller.language),
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            home: const CupertinoPageScaffold(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ProfileForm(initialProfile: UserProfile()),
+                    AppSettingsSection(),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    expect(find.text('ЛИЧНЫЕ ДАННЫЕ'), findsOneWidget);
+    final nameField = find.byType(CupertinoTextField).first;
+    await tester.enterText(nameField, 'Артём');
+    FocusManager.instance.primaryFocus?.unfocus();
+    await tester.pumpAndSettle();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    await tester.ensureVisible(find.text('EN'));
+    await tester.tap(find.text('EN'));
+    await tester.pumpAndSettle();
+
+    expect(settings.language, 'en');
+    expect(find.text('PERSONAL DETAILS'), findsOneWidget);
+    expect(find.text('Dark theme'), findsOneWidget);
+    expect(find.text('Save'), findsOneWidget);
+    expect(find.text('Артём'), findsOneWidget);
+
+    await tester.ensureVisible(find.text('RU'));
+    await tester.tap(find.text('RU'));
+    await tester.pumpAndSettle();
+
+    expect(settings.language, 'ru');
+    expect(find.text('ЛИЧНЫЕ ДАННЫЕ'), findsOneWidget);
+    expect(find.text('Сохранить'), findsOneWidget);
+    expect(find.text('Артём'), findsOneWidget);
+
+    await tester.pumpWidget(const SizedBox());
+    settings.dispose();
   });
 }

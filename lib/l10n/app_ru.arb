@@ -1,0 +1,82 @@
+{
+  "@@locale": "ru",
+  "home": "Главная",
+  "workouts": "Тренировки",
+  "account": "Аккаунт",
+  "welcome": "Добро пожаловать!",
+  "weeklyStreak": "Недельная серия",
+  "streakDays": "{count, plural, one{{count} день подряд} few{{count} дня подряд} many{{count} дней подряд} other{{count} дня подряд}}",
+  "@streakDays": {
+    "description": "Количество дней подряд",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "workoutCountLabel": "Тренировок",
+  "emptyWorkouts": "Тренировок пока нет, день отдыха",
+  "addWorkout": "Добавить тренировку",
+  "close": "Закрыть",
+  "customWorkout": "Своя тренировка",
+  "checkFields": "Проверь поля",
+  "workoutValidation": "Название и продолжительность (число > 0) обязательны.",
+  "ok": "ОК",
+  "save": "Сохранить",
+  "saved": "Сохранено",
+  "time": "Время",
+  "workoutTitle": "Название",
+  "workoutExample": "Например, Кроссфит",
+  "coachOptional": "Тренер (необязательно)",
+  "coachName": "Имя тренера",
+  "durationMinutes": "Продолжительность, мин",
+  "workoutDetails": "{coach} · {minutes} мин",
+  "@workoutDetails": {
+    "description": "Тренер и продолжительность",
+    "placeholders": {
+      "coach": {
+        "type": "String"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "appSection": "ПРИЛОЖЕНИЕ",
+  "darkTheme": "Тёмная тема",
+  "units": "Единицы измерения",
+  "unitSystem": "кг / см",
+  "interfaceLanguage": "Язык интерфейса",
+  "accountSection": "АККАУНТ",
+  "changePassword": "Сменить пароль",
+  "linkSocial": "Привязать соцсеть",
+  "deleteAccount": "Удалить аккаунт",
+  "signOut": "Выйти из аккаунта",
+  "accountUnavailable": "Действия аккаунта станут доступны после подключения входа.",
+  "personalData": "ЛИЧНЫЕ ДАННЫЕ",
+  "firstName": "Имя",
+  "lastName": "Фамилия",
+  "middleName": "Отчество",
+  "birthDate": "Дата рождения",
+  "dateHint": "ДД.ММ.ГГГГ",
+  "email": "Email",
+  "phone": "Телефон",
+  "heightCm": "Рост, см",
+  "weightKg": "Вес, кг",
+  "targetKg": "Цель, кг",
+  "targetWeightHint": "Желаемый вес",
+  "notSpecified": "Не указано",
+  "saveError": "Не удалось сохранить",
+  "saveRetry": "Данные остались в форме. Попробуйте ещё раз.",
+  "positiveMeasurements": "Рост, вес и цель должны быть числами больше нуля.",
+  "invalidBirthDate": "Проверьте дату рождения. Формат: ДД.ММ.ГГГГ.",
+  "invalidEmail": "Проверьте email. Пример: name@mail.ru.",
+  "profileLoadError": "Не удалось загрузить профиль",
+  "retry": "Повторить",
+  "nameNotSpecified": "Имя не указано",
+  "height": "Рост",
+  "weight": "Вес",
+  "goal": "Цель",
+  "cm": "см",
+  "kg": "кг"
+}

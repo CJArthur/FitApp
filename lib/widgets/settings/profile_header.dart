@@ -1,3 +1,4 @@
+import 'package:fitapp/l10n/app_localizations.dart';
 import 'package:fitapp/data/models/user_profile.dart';
 import 'package:fitapp/theme/app_theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,13 +11,14 @@ class ProfileHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         const _AvatarPlaceholder(),
         const SizedBox(height: 16),
         Text(
-          profile.displayName,
+          profile.displayName.isEmpty ? l10n.nameNotSpecified : profile.displayName,
           textAlign: TextAlign.center,
           style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
         ),
@@ -24,11 +26,11 @@ class ProfileHeader extends StatelessWidget {
         // Читаем сохранённую модель, а не текст полей формы.
         Row(
           children: [
-            Expanded(child: _MetricCard(label: 'Рост', value: profile.height, unit: 'см')),
+            Expanded(child: _MetricCard(label: l10n.height, value: profile.height, unit: l10n.cm)),
             const SizedBox(width: 10),
-            Expanded(child: _MetricCard(label: 'Вес', value: profile.weight, unit: 'кг')),
+            Expanded(child: _MetricCard(label: l10n.weight, value: profile.weight, unit: l10n.kg)),
             const SizedBox(width: 10),
-            Expanded(child: _MetricCard(label: 'Цель', value: profile.targetWeight, unit: 'кг')),
+            Expanded(child: _MetricCard(label: l10n.goal, value: profile.targetWeight, unit: l10n.kg)),
           ],
         ),
       ],

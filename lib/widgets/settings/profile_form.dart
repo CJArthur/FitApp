@@ -1,3 +1,4 @@
+import 'package:fitapp/l10n/app_localizations.dart';
 import 'package:fitapp/controllers/profile_controller.dart';
 import 'package:fitapp/data/models/user_profile.dart';
 import 'package:fitapp/theme/app_theme.dart';
@@ -92,15 +93,16 @@ class _ProfileFormState extends State<ProfileForm> {
   }
 
   Future<void> _showError(String message) {
+    final l10n = AppLocalizations.of(context);
     return showCupertinoDialog<void>(
       context: context,
       builder: (dialogContext) => CupertinoAlertDialog(
-        title: const Text('Не удалось сохранить'),
+        title: Text(l10n.saveError),
         content: Text(message),
         actions: [
           CupertinoDialogAction(
             onPressed: () => Navigator.of(dialogContext).pop(),
-            child: const Text('ОК'),
+            child: Text(l10n.ok),
           ),
         ],
       ),
@@ -108,6 +110,7 @@ class _ProfileFormState extends State<ProfileForm> {
   }
 
   Future<void> _save() async {
+    final l10n = AppLocalizations.of(context);
     if (_saving) return;
 
     // Читаем поля и убираем пробелы по краям.
@@ -125,11 +128,11 @@ class _ProfileFormState extends State<ProfileForm> {
     // Проверки выполняются перед созданием объекта, как в форме тренировки.
     if (!_isValidNumber(height) || !_isValidNumber(weight) ||
         !_isValidNumber(targetWeight)) {
-      await _showError('Рост, вес и цель должны быть числами больше нуля.');
+      await _showError(l10n.positiveMeasurements);
       return;
     }
     if (!_isValidBirthDate(birthDate)) {
-      await _showError('Проверьте дату рождения. Формат: ДД.ММ.ГГГГ.');
+      await _showError(l10n.invalidBirthDate);
       return;
     }
     // Простая проверка email без регулярных выражений.
@@ -139,7 +142,7 @@ class _ProfileFormState extends State<ProfileForm> {
           !parts[1].contains('.') || parts[1].startsWith('.') ||
           parts[1].endsWith('.') || email.contains(' ') ||
           email.contains('\t') || email.contains('\n')) {
-        await _showError('Проверьте email. Пример: name@mail.ru.');
+        await _showError(l10n.invalidEmail);
         return;
       }
     }
@@ -169,7 +172,7 @@ class _ProfileFormState extends State<ProfileForm> {
       if (mounted) setState(() => _saved = true);
     } catch (_) {
       if (mounted) {
-        await _showError('Данные остались в форме. Попробуйте ещё раз.');
+        await _showError(l10n.saveRetry);
       }
     } finally {
       if (mounted) setState(() => _saving = false);
@@ -178,13 +181,14 @@ class _ProfileFormState extends State<ProfileForm> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final accent = AppColors.accent.resolveFrom(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         // Поля, их проверки и кнопка сохранения находятся в одном виджете.
-        _buildSectionTitle('ЛИЧНЫЕ ДАННЫЕ'),
+        _buildSectionTitle(l10n.personalData),
         CupertinoFormSection.insetGrouped(
           margin: EdgeInsets.zero,
           backgroundColor: CupertinoColors.transparent,
@@ -193,23 +197,23 @@ class _ProfileFormState extends State<ProfileForm> {
             borderRadius: BorderRadius.circular(16),
           ),
           children: [
-            _buildField('Имя', _firstNameController, placeholder: 'Не указано'),
-            _buildField('Фамилия', _lastNameController, placeholder: 'Не указано'),
-            _buildField('Отчество', _middleNameController, placeholder: 'Не указано'),
-            _buildField('Дата рождения', _birthDateController,
-                placeholder: 'ДД.ММ.ГГГГ', keyboardType: TextInputType.datetime),
-            _buildField('Email', _emailController,
-                placeholder: 'Не указан', keyboardType: TextInputType.emailAddress),
-            _buildField('Телефон', _phoneController,
-                placeholder: 'Не указан', keyboardType: TextInputType.phone),
-            _buildField('Рост, см', _heightController,
-                placeholder: 'Не указан',
+            _buildField(l10n.firstName, _firstNameController, placeholder: l10n.notSpecified),
+            _buildField(l10n.lastName, _lastNameController, placeholder: l10n.notSpecified),
+            _buildField(l10n.middleName, _middleNameController, placeholder: l10n.notSpecified),
+            _buildField(l10n.birthDate, _birthDateController,
+                placeholder: l10n.dateHint, keyboardType: TextInputType.datetime),
+            _buildField(l10n.email, _emailController,
+                placeholder: l10n.notSpecified, keyboardType: TextInputType.emailAddress),
+            _buildField(l10n.phone, _phoneController,
+                placeholder: l10n.notSpecified, keyboardType: TextInputType.phone),
+            _buildField(l10n.heightCm, _heightController,
+                placeholder: l10n.notSpecified,
                 keyboardType: const TextInputType.numberWithOptions(decimal: true)),
-            _buildField('Вес, кг', _weightController,
-                placeholder: 'Не указан',
+            _buildField(l10n.weightKg, _weightController,
+                placeholder: l10n.notSpecified,
                 keyboardType: const TextInputType.numberWithOptions(decimal: true)),
-            _buildField('Цель, кг', _targetWeightController,
-                placeholder: 'Желаемый вес',
+            _buildField(l10n.targetKg, _targetWeightController,
+                placeholder: l10n.targetWeightHint,
                 keyboardType: const TextInputType.numberWithOptions(decimal: true)),
           ],
         ),
@@ -221,7 +225,7 @@ class _ProfileFormState extends State<ProfileForm> {
           child: _saving
               ? const CupertinoActivityIndicator()
               : Text(
-                  _saved ? 'Сохранено' : 'Сохранить',
+                  _saved ? l10n.saved : l10n.save,
                   style: TextStyle(
                     color: AppColors.accentText.resolveFrom(context),
                     fontWeight: FontWeight.w600,

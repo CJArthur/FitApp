@@ -6,7 +6,7 @@ import 'package:fitapp/data/dao/workouts_dao.dart';
 import 'package:fitapp/screens/main_screen.dart';
 import 'package:fitapp/theme/app_theme.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:fitapp/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import 'dart:io';
@@ -44,16 +44,14 @@ class WorkoutApp extends StatelessWidget {
               WorkoutsController(WorkoutsDao())..selectDate(DateTime.now()),
         ),
       ],
-      // Consumer перестраивает приложение при переключении темы.
+      // Consumer обновляет тему и язык приложения после notifyListeners.
       child: Consumer<AppSettingsController>(
         builder: (context, controller, child) => CupertinoApp(
           theme: controller.isDarkMode ? AppTheme.dark : AppTheme.light,
-          localizationsDelegates: const [
-            GlobalCupertinoLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-          ],
-          supportedLocales: const [Locale('ru')],
+          // locale определяет, из какого файла брать переводы: ru или en.
+          locale: Locale(controller.language),
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           home: const MainScreen(),
         ),
       ),

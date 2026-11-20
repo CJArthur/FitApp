@@ -11,17 +11,17 @@ class ProfileController extends ChangeNotifier {
 
   bool _isLoading = true;
   bool get isLoading => _isLoading;
-  String? _loadError;
-  String? get loadError => _loadError;
+  bool _hasLoadError = false;
+  bool get hasLoadError => _hasLoadError;
 
   Future<void> load() async {
     _isLoading = true;
-    _loadError = null;
+    _hasLoadError = false;
     notifyListeners();
     try {
       _profile = await _dao.getProfile();
     } catch (_) {
-      _loadError = 'Не удалось загрузить профиль';
+      _hasLoadError = true;
     } finally {
       _isLoading = false;
       notifyListeners();

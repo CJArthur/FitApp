@@ -1,3 +1,4 @@
+import 'package:fitapp/l10n/app_localizations.dart';
 import 'package:fitapp/controllers/workouts_controller.dart';
 import 'package:fitapp/data/models/workout.dart';
 import 'package:fitapp/theme/app_theme.dart';
@@ -35,20 +36,21 @@ class WorkoutsList extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 5),
-        Expanded(child: _buildBody(controller)),
+        Expanded(child: _buildBody(context, controller)),
       ],
     );
   }
 
-  Widget _buildBody(WorkoutsController controller) {
+  Widget _buildBody(BuildContext context, WorkoutsController controller) {
+    final l10n = AppLocalizations.of(context);
     if (controller.isLoading) {
-      return const Center(child: CupertinoActivityIndicator());
+      return Center(child: CupertinoActivityIndicator());
     }
 
     if (controller.workouts.isEmpty) {
-      return const Center(
+      return Center(
         child: Text(
-          'Тренировок пока нет, день отдыха',
+          l10n.emptyWorkouts,
           style: TextStyle(color: CupertinoColors.systemGrey),
         ),
       );
@@ -82,6 +84,7 @@ class _WorkoutCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     // Выбираем цвет по id, чтобы не менялся при скролле и был разным
     final stripeColor = _accentColors[workout.id.hashCode.abs() % _accentColors.length];
 
@@ -139,7 +142,7 @@ class _WorkoutCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      '${workout.coach} · ${workout.durationMinutes} мин',
+                      l10n.workoutDetails(workout.coach, workout.durationMinutes),
                       style: const TextStyle(fontSize: 13, color: CupertinoColors.systemGrey),
                     ),
                   ],

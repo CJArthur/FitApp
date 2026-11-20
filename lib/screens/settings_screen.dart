@@ -1,3 +1,4 @@
+import 'package:fitapp/l10n/app_localizations.dart';
 import 'package:fitapp/controllers/profile_controller.dart';
 import 'package:fitapp/widgets/settings/account_section.dart';
 import 'package:fitapp/widgets/settings/app_settings_section.dart';
@@ -12,19 +13,20 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final controller = context.watch<ProfileController>();
     if (controller.isLoading) {
-      return const Center(child: CupertinoActivityIndicator());
+      return Center(child: CupertinoActivityIndicator());
     }
-    if (controller.loadError != null) {
+    if (controller.hasLoadError) {
       return Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(controller.loadError!),
+            Text(l10n.profileLoadError),
             CupertinoButton(
               onPressed: controller.load,
-              child: const Text('Повторить'),
+              child: Text(l10n.retry),
             ),
           ],
         ),

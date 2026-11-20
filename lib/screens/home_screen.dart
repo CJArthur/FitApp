@@ -1,3 +1,4 @@
+import 'package:fitapp/l10n/app_localizations.dart';
 import 'package:fitapp/controllers/workouts_controller.dart';
 import 'package:fitapp/theme/app_theme.dart';
 import 'package:fitapp/widgets/add_workout_sheet.dart';
@@ -11,6 +12,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final controller = context.watch<WorkoutsController>();
 
     return CupertinoPageScaffold(
@@ -24,7 +26,7 @@ class HomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Добро пожаловать!',
+                    l10n.welcome,
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
@@ -59,6 +61,7 @@ class _StreakCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return DecoratedBox(
       decoration: BoxDecoration(
         color: AppColors.accent.resolveFrom(context),
@@ -79,8 +82,8 @@ class _StreakCard extends StatelessWidget {
               Expanded(
                 child: Column(
                   children: [
-                    const Text(
-                      'Недельная серия',
+                    Text(
+                      l10n.weeklyStreak,
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
@@ -88,7 +91,7 @@ class _StreakCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      '$days дней подряд',
+                      l10n.streakDays(days),
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -106,7 +109,7 @@ class _StreakCard extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const Text('Тренировок', style: TextStyle(fontSize: 10)),
+                  Text(l10n.workoutCountLabel, style: TextStyle(fontSize: 10)),
                 ],
               ),
             ],
@@ -125,7 +128,7 @@ class _DateStrip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TableCalendar(
-      locale: 'ru_RU',
+      locale: Localizations.localeOf(context).toString(),
       firstDay: DateTime.now().subtract(const Duration(days: 365)),
       lastDay: DateTime.now().add(const Duration(days: 365)),
       focusedDay: controller.selectedDate,
